@@ -1,5 +1,6 @@
 """코너검출"""
 import os
+import numpy as np
 import cv2
 home_dir = os.path.expanduser("~/Documents/StudyPY/StudyPY/Image")
 image_path = os.path.join(home_dir, "nemo.png")
@@ -19,6 +20,8 @@ gray = cv2.cvtColor(src, cv2.COLOR_RGB2GRAY)
 # 해리스 코너 검출기 유/무 -> 해리스 코너 검출 방법 사용 여부를 설정합니다.
 # 해리스 코너 계수 -> 해리스 알고리즘을 사용할 때 할당하며 해리스 대각합의 감도 계수를 의미합니다.
 corners = cv2.goodFeaturesToTrack(gray, 100, 0.01, 5, blockSize=3, useHarrisDetector=True, k=0.03)
+# 해당코드를 입력하여 사이클이 그려지도록 수정
+corners = np.int32(corners)
 
 for i in corners:
     cv2.circle(dst, tuple(i[0]), 3, (0, 0, 255), 2)
